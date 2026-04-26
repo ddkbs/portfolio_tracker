@@ -11,15 +11,23 @@ portfolio = [ #Erstellt eine Liste von Dictionaries, die Informationen über Akt
     }
 ]
 
-print(portfolio[0]) #Gibt das gesamte Dictionary der ersten Aktie (AAPL) aus
-print(portfolio[0]["name"]) #Gibt den Namen der ersten Aktie (AAPL) aus
-print(portfolio[1]["anzahl"]) #Gibt die Anzahl der zweiten Aktie (GOOG) aus
+def berechne_gesamtwert():
+    gesamtwert = 0
+    einzelwerte = []
 
-gesamtwert = 0
+    for aktie in portfolio:
+        auflistung = aktie["kaufpreis"] * aktie["anzahl"]
+        gesamtwert += auflistung
+        einzelwerte.append(aktie["name"] + ": " + str(auflistung))
 
-for aktie in portfolio:
-    auflistung = aktie["kaufpreis"] * aktie["anzahl"]
-    gesamtwert += auflistung
-    print(aktie["name"], "," , auflistung) 
+    return gesamtwert, einzelwerte
 
-print("Gesamtwert:", gesamtwert)
+def zeige_portfolio():
+    wert, einzelwerte= berechne_gesamtwert()
+    
+    for eintrag in einzelwerte:
+        print(eintrag)
+
+    print("Gesamtwert:", wert)
+
+zeige_portfolio() 
