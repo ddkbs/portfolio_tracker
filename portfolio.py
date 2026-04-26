@@ -1,33 +1,33 @@
-portfolio = [ #Erstellt eine Liste von Dictionaries, die Informationen über Aktien enthält
-    {
-        "name": "AAPL", # Name der Aktien kann über portfolio[0]["name"] abgerufen werden
-        "kaufpreis": 150.0, # Kaufpreis der Aktien kann über portfolio[0]["kaufpreis"] abgerufen werden
-        "anzahl": 7, # Anzahl der Aktien kann über portfolio[0]["anzahl"] abgerufen werden
-    },
-    {
-        "name": "GOOG", # Name der Aktien kann über portfolio[1]["name"] abgerufen werden
-        "kaufpreis": 2800.0,
-        "anzahl": 2,
-    }
-]
+portfolio = []
 
-def berechne_gesamtwert():
-    gesamtwert = 0
-    einzelwerte = []
+def aktie_hinzufuegen():
+    while True:
+        name = input("Name der Aktie: ")
+        kaufpreis = float(input("Kaufpreis der Aktie: "))
+        anzahl = int(input("Anzahl der Aktien: "))
+        portfolio.append({"name": name, "kaufpreis": kaufpreis, "anzahl": anzahl})
+        eingabe = input("Weiter? (j/n): ")
+        if eingabe == "n":
+            break
+aktie_hinzufuegen() #Funktion wird ausgeführt, um eine Aktie hinzuzufügen
+
+def berechne_gesamtwert(): #Funktion wird erstellt
+    gesamtwert = 0 #Variable erstellt
+    info_positionen = [] #Liste erstellt
 
     for aktie in portfolio:
-        auflistung = aktie["kaufpreis"] * aktie["anzahl"]
-        gesamtwert += auflistung
-        einzelwerte.append(aktie["name"] + ": " + str(auflistung))
+        wert_berechnung = aktie["kaufpreis"] * aktie["anzahl"] #Berechnung des Wertes
+        gesamtwert += wert_berechnung # Gesamtwert wird mit jedem Durchgang um wert der aktuellen Aktie erhöt
+        info_positionen.append(aktie["name"] + ": " + str(wert_berechnung)) # Informationen werden in Liste gespeichert
 
-    return gesamtwert, einzelwerte
+    return gesamtwert, info_positionen # Funktion gibt Gesamtwert und Informationen zurück
 
-def zeige_portfolio():
-    wert, einzelwerte= berechne_gesamtwert()
+def zeige_portfolio(): #Funktion wird erstellt
+    wert, info_positionen= berechne_gesamtwert() # wert wird gesamtwert zugewiesen, info_positionen werden die Informationen zugewiesen
     
-    for eintrag in einzelwerte:
-        print(eintrag)
+    for eintrag in info_positionen: #Einträge in Info_positionen werden durchlaufen
+        print(eintrag) #Einträge werden ausgegeben
 
-    print("Gesamtwert:", wert)
+    print("Gesamtwert:", wert) #Gesamtwert wird ausgegeben
 
-zeige_portfolio() 
+zeige_portfolio() #Funktion wird ausgeführt
